@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import persons from './client_data/persons';
 import Person from './components/Person';
 
 // styles
@@ -12,19 +11,36 @@ class App extends Component {
   constructor(){
     super()
 
-    this.state = {
-      personList: persons
-    }
+  }
+
+  handleClick({id}){
+    this.setState({
+      id,
+    })
+  }
+
+  componentDidMount(){
+    fetch("https://api.github.com/users")
+    .then((response) => response.json())
+    .then((result) => {
+      this.setState({users: result, id: result[0].id})
+    })
   }
 
   render(){
-    const personMap = this.state.personList.map(item => <Person key={item.id} name={item.name} age={item.age} description={item.description} />)
+    const foundUser = this.state.users.find((user) => user.id === this.state.id || {})
+    const {login, repos_url, followers_url} = foundUser
 
     return(
       <React.Fragment>
         <div style={wrapper}>
-          {personMap}
+          
         </div>
+        <Person 
+          headline={login}
+          description={repos_url}
+          age={followers_url}
+        />
       </React.Fragment>
     )
   }
