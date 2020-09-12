@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import persons from './client_data/persons';
+import Person from './components/Person';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// styles
+const wrapper = {
+  margin: '2rem 3%'
+}
+
+class App extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      personList: persons
+    }
+  }
+
+  render(){
+    const personMap = this.state.personList.map(item => <Person key={item.id} name={item.name} age={item.age} description={item.description} />)
+
+    return(
+      <React.Fragment>
+        <div style={wrapper}>
+          {personMap}
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
 export default App;
