@@ -1,17 +1,13 @@
 import React from 'react'
 
-class Person extends React.Component {
-    render(){
-        const {headline, description, age} = this.props
+export default function Person(props){
+    const {headline, description, age} = props
 
-        return(
-            <div>
-                <h1>{headline}</h1>
-                <p>{description}</p>
-                <small>{age}</small>
-            </div>
-        )
-    }
+    return(
+        <div>
+            <h1>{headline}</h1>
+            <p>{description}</p>
+            <small>{age}</small>
+        </div>
+    )
 }
-
-export default Person

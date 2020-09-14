@@ -1,19 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import Person from './components/Person';
 
-// styles
-const wrapper = {
-  margin: '2rem 3%'
-}
-
-class App extends Component {
+class App extends React.Component {
   constructor(){
     super()
 
+    this.state = {
+      id: 2,
+      user: [],
+    }
   }
 
-  handleClick({id}){
+  handleClick({ id }){
     this.setState({
       id,
     })
@@ -28,20 +27,26 @@ class App extends Component {
   }
 
   render(){
-    const foundUser = this.state.users.find((user) => user.id === this.state.id || {})
-    const {login, repos_url, followers_url} = foundUser
+    console.log(this.state.id)
+
+    const foundUser = 
+      this.state.users.find((user) => user.id === this.state.id) || {}
+
+    const { login, repos_url, followers_url } = foundUser
 
     return(
-      <React.Fragment>
-        <div style={wrapper}>
-          
-        </div>
+      <div>
+        {
+          this.state.users.map((user) => {
+          return <div onClick={() => this.handleClick(user)}>{user.login}</div>
+          })
+        }
         <Person 
           headline={login}
           description={repos_url}
           age={followers_url}
         />
-      </React.Fragment>
+      </div>
     )
   }
 }
