@@ -8,7 +8,7 @@ class App extends React.Component {
 
     this.state = {
       id: 2,
-      user: [],
+      users: [],
     }
   }
 
@@ -35,7 +35,7 @@ class App extends React.Component {
     const { login, repos_url, followers_url } = foundUser
 
     return(
-      <div>
+      <div style={{margin: '3rem 3rem', fontSize: '1.2rem'}}>
         {
           this.state.users.map((user) => {
           return <div onClick={() => this.handleClick(user)}>{user.login}</div>
