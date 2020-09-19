@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './components/Person';
 
-class App extends React.Component {
+class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      id: 2,
+      id: 1,
       users: [],
     }
   }
@@ -27,28 +27,22 @@ class App extends React.Component {
   }
 
   render(){
-    console.log(this.state.id)
-
-    const foundUser = 
-      this.state.users.find((user) => user.id === this.state.id) || {}
-
-    const { login, repos_url, followers_url } = foundUser
-
+    const foundUser = this.state.users.find(user => user.id === this.state.id) || {}
+    const {login, repos_url, followers_url} = foundUser
     return(
-      <div style={{margin: '3rem 3rem', fontSize: '1.2rem'}}>
-        {
-          this.state.users.map((user) => {
-          return <div onClick={() => this.handleClick(user)}>{user.login}</div>
-          })
-        }
-        <Person 
-          headline={login}
-          description={repos_url}
-          age={followers_url}
-        />
-      </div>
+      <React.Fragment>
+      {this.state.users.map(user => {
+        return <div onClick={() => this.handleClick(user)}>{user.login}</div>
+      })
+      }
+      <Person 
+        headline={login}
+        description={repos_url}
+        age={followers_url}
+      />
+      </React.Fragment>
     )
   }
 }
 
-export default App;
+export default App
