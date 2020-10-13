@@ -29,6 +29,7 @@ class App extends Component {
   render(){
     const foundUser = this.state.users.find(user => user.id === this.state.id) || {}
     const {login, repos_url, followers_url} = foundUser
+
     return(
       <React.Fragment>
       {this.state.users.map(user => {
